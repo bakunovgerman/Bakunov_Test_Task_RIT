@@ -32,13 +32,25 @@ class ItemsAdapter(private val list: MutableList<ItemRss>?, val onPopularNowItem
 
         fun bind(itemRss: ItemRss) {
             item = itemRss
-            itemTitleText.text = itemRss.title
-            itemCategoryText.text = itemRss.category
-            itemDescriptionText.text = itemRss.description
-            if (itemImage != null)
+            if (item.title != null && item.title != "")
+                itemTitleText.text = itemRss.title
+            else
+                itemTitleText.visibility = View.GONE
+
+            if (item.category != null && item.category != "")
+                itemCategoryText.text = itemRss.category
+            else
+                itemCategoryText.visibility = View.GONE
+
+            if (item.description != null && item.description != "")
+                itemDescriptionText.text = itemRss.description
+            else
+                itemDescriptionText.visibility = View.GONE
+
+            if (item.imgUrl != null)
                 Picasso.get().load(itemRss.imgUrl).into(itemImage)
             else
-                itemImage.
+                itemImage.visibility = View.GONE
 
         }
 

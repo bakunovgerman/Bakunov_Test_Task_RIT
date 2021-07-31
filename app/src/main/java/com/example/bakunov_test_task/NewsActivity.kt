@@ -122,6 +122,10 @@ class NewsActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             showProgressBar()
             val list: MutableList<ItemRss>? = withContext(Dispatchers.IO) { parsingRSS(address) }
+            Log.d("foreach", "size: ${list?.size}")
+            list?.forEach {
+                Log.d("foreach", "category: ${it.category}")
+            }
             itemsRssAdapter = ItemsAdapter(list){
                 Toast.makeText(this@NewsActivity, it.title, Toast.LENGTH_LONG).show()
             }
@@ -130,11 +134,6 @@ class NewsActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(this@NewsActivity)
             }
             hideProgressBar()
-//            list?.forEach {
-//                Log.d("foreach", "imgUrl: ${it.imgUrl}")
-//            }
-
-
         }
     }
 }
